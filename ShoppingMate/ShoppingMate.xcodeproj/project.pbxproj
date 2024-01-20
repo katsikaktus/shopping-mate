@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5274AFDF2B5C34160016EBCA /* ShoppingMateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5274AFDE2B5C34160016EBCA /* ShoppingMateApp.swift */; };
-		5274AFE12B5C34160016EBCA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5274AFE02B5C34160016EBCA /* ContentView.swift */; };
 		5274AFE32B5C34190016EBCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5274AFE22B5C34190016EBCA /* Assets.xcassets */; };
 		5274AFE62B5C34190016EBCA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5274AFE52B5C34190016EBCA /* Preview Assets.xcassets */; };
 		5274AFF02B5C34190016EBCA /* ShoppingMateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5274AFEF2B5C34190016EBCA /* ShoppingMateTests.swift */; };
@@ -17,6 +16,12 @@
 		5274B0092B5C37250016EBCA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5274B0082B5C37250016EBCA /* GoogleService-Info.plist */; };
 		5274B00C2B5C39430016EBCA /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 5274B00B2B5C39430016EBCA /* FirebaseAnalytics */; };
 		5274B00E2B5C39430016EBCA /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5274B00D2B5C39430016EBCA /* FirebaseAnalyticsSwift */; };
+		5274B0112B5C44D50016EBCA /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5274B0102B5C44D50016EBCA /* FirebaseAuth */; };
+		5274B0142B5C46480016EBCA /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5274B0132B5C46480016EBCA /* AuthenticationView.swift */; };
+		5274B0162B5C487B0016EBCA /* LogInEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5274B0152B5C487B0016EBCA /* LogInEmailView.swift */; };
+		5274B0182B5C57410016EBCA /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5274B0172B5C57410016EBCA /* AuthenticationManager.swift */; };
+		527B420E2B5C7739000B414E /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527B420D2B5C7739000B414E /* RootView.swift */; };
+		527B42102B5C7E7B000B414E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527B420F2B5C7E7B000B414E /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +44,6 @@
 /* Begin PBXFileReference section */
 		5274AFDB2B5C34160016EBCA /* ShoppingMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingMate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5274AFDE2B5C34160016EBCA /* ShoppingMateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingMateApp.swift; sourceTree = "<group>"; };
-		5274AFE02B5C34160016EBCA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5274AFE22B5C34190016EBCA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5274AFE52B5C34190016EBCA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5274AFEB2B5C34190016EBCA /* ShoppingMateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShoppingMateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,6 +52,11 @@
 		5274AFF92B5C34190016EBCA /* ShoppingMateUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingMateUITests.swift; sourceTree = "<group>"; };
 		5274AFFB2B5C34190016EBCA /* ShoppingMateUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingMateUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		5274B0082B5C37250016EBCA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5274B0132B5C46480016EBCA /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
+		5274B0152B5C487B0016EBCA /* LogInEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInEmailView.swift; sourceTree = "<group>"; };
+		5274B0172B5C57410016EBCA /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		527B420D2B5C7739000B414E /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		527B420F2B5C7E7B000B414E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +65,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5274B00E2B5C39430016EBCA /* FirebaseAnalyticsSwift in Frameworks */,
+				5274B0112B5C44D50016EBCA /* FirebaseAuth in Frameworks */,
 				5274B00C2B5C39430016EBCA /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -84,6 +94,7 @@
 				5274AFEE2B5C34190016EBCA /* ShoppingMateTests */,
 				5274AFF82B5C34190016EBCA /* ShoppingMateUITests */,
 				5274AFDC2B5C34160016EBCA /* Products */,
+				5274B00F2B5C44D50016EBCA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -100,8 +111,8 @@
 		5274AFDD2B5C34160016EBCA /* ShoppingMate */ = {
 			isa = PBXGroup;
 			children = (
+				5274B0122B5C46210016EBCA /* Authentication */,
 				5274AFDE2B5C34160016EBCA /* ShoppingMateApp.swift */,
-				5274AFE02B5C34160016EBCA /* ContentView.swift */,
 				5274B0082B5C37250016EBCA /* GoogleService-Info.plist */,
 				5274AFE22B5C34190016EBCA /* Assets.xcassets */,
 				5274AFE42B5C34190016EBCA /* Preview Content */,
@@ -134,6 +145,25 @@
 			path = ShoppingMateUITests;
 			sourceTree = "<group>";
 		};
+		5274B00F2B5C44D50016EBCA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5274B0122B5C46210016EBCA /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				527B420D2B5C7739000B414E /* RootView.swift */,
+				5274B0132B5C46480016EBCA /* AuthenticationView.swift */,
+				5274B0152B5C487B0016EBCA /* LogInEmailView.swift */,
+				5274B0172B5C57410016EBCA /* AuthenticationManager.swift */,
+				527B420F2B5C7E7B000B414E /* SettingsView.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -153,6 +183,7 @@
 			packageProductDependencies = (
 				5274B00B2B5C39430016EBCA /* FirebaseAnalytics */,
 				5274B00D2B5C39430016EBCA /* FirebaseAnalyticsSwift */,
+				5274B0102B5C44D50016EBCA /* FirebaseAuth */,
 			);
 			productName = ShoppingMate;
 			productReference = 5274AFDB2B5C34160016EBCA /* ShoppingMate.app */;
@@ -272,8 +303,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5274AFE12B5C34160016EBCA /* ContentView.swift in Sources */,
 				5274AFDF2B5C34160016EBCA /* ShoppingMateApp.swift in Sources */,
+				5274B0142B5C46480016EBCA /* AuthenticationView.swift in Sources */,
+				5274B0182B5C57410016EBCA /* AuthenticationManager.swift in Sources */,
+				527B42102B5C7E7B000B414E /* SettingsView.swift in Sources */,
+				5274B0162B5C487B0016EBCA /* LogInEmailView.swift in Sources */,
+				527B420E2B5C7739000B414E /* RootView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -625,6 +660,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5274B00A2B5C39430016EBCA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalyticsSwift;
+		};
+		5274B0102B5C44D50016EBCA /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5274B00A2B5C39430016EBCA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
