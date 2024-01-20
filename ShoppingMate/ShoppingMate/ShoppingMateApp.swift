@@ -6,9 +6,16 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
 struct ShoppingMateApp: App {
+    
+    init() {
+        FirebaseApp.configure()
+        print("Firebase configured!")
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

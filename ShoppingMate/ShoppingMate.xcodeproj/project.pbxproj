@@ -14,6 +14,9 @@
 		5274AFF02B5C34190016EBCA /* ShoppingMateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5274AFEF2B5C34190016EBCA /* ShoppingMateTests.swift */; };
 		5274AFFA2B5C34190016EBCA /* ShoppingMateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5274AFF92B5C34190016EBCA /* ShoppingMateUITests.swift */; };
 		5274AFFC2B5C34190016EBCA /* ShoppingMateUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5274AFFB2B5C34190016EBCA /* ShoppingMateUITestsLaunchTests.swift */; };
+		5274B0092B5C37250016EBCA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5274B0082B5C37250016EBCA /* GoogleService-Info.plist */; };
+		5274B00C2B5C39430016EBCA /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 5274B00B2B5C39430016EBCA /* FirebaseAnalytics */; };
+		5274B00E2B5C39430016EBCA /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5274B00D2B5C39430016EBCA /* FirebaseAnalyticsSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,7 @@
 		5274AFF52B5C34190016EBCA /* ShoppingMateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShoppingMateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5274AFF92B5C34190016EBCA /* ShoppingMateUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingMateUITests.swift; sourceTree = "<group>"; };
 		5274AFFB2B5C34190016EBCA /* ShoppingMateUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingMateUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5274B0082B5C37250016EBCA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +55,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5274B00E2B5C39430016EBCA /* FirebaseAnalyticsSwift in Frameworks */,
+				5274B00C2B5C39430016EBCA /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +102,7 @@
 			children = (
 				5274AFDE2B5C34160016EBCA /* ShoppingMateApp.swift */,
 				5274AFE02B5C34160016EBCA /* ContentView.swift */,
+				5274B0082B5C37250016EBCA /* GoogleService-Info.plist */,
 				5274AFE22B5C34190016EBCA /* Assets.xcassets */,
 				5274AFE42B5C34190016EBCA /* Preview Content */,
 			);
@@ -143,6 +150,10 @@
 			dependencies = (
 			);
 			name = ShoppingMate;
+			packageProductDependencies = (
+				5274B00B2B5C39430016EBCA /* FirebaseAnalytics */,
+				5274B00D2B5C39430016EBCA /* FirebaseAnalyticsSwift */,
+			);
 			productName = ShoppingMate;
 			productReference = 5274AFDB2B5C34160016EBCA /* ShoppingMate.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +226,9 @@
 				Base,
 			);
 			mainGroup = 5274AFD22B5C34160016EBCA;
+			packageReferences = (
+				5274B00A2B5C39430016EBCA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 5274AFDC2B5C34160016EBCA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -233,6 +247,7 @@
 			files = (
 				5274AFE62B5C34190016EBCA /* Preview Assets.xcassets in Resources */,
 				5274AFE32B5C34190016EBCA /* Assets.xcassets in Resources */,
+				5274B0092B5C37250016EBCA /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,6 +603,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5274B00A2B5C39430016EBCA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.20.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5274B00B2B5C39430016EBCA /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5274B00A2B5C39430016EBCA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		5274B00D2B5C39430016EBCA /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5274B00A2B5C39430016EBCA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5274AFD32B5C34160016EBCA /* Project object */;
 }
