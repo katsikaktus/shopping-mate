@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		523010182B66ECF400BB0F9A /* InputRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523010172B66ECF400BB0F9A /* InputRowView.swift */; };
 		5274AFDF2B5C34160016EBCA /* ShoppingMateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5274AFDE2B5C34160016EBCA /* ShoppingMateApp.swift */; };
 		5274AFE32B5C34190016EBCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5274AFE22B5C34190016EBCA /* Assets.xcassets */; };
 		5274AFE62B5C34190016EBCA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5274AFE52B5C34190016EBCA /* Preview Assets.xcassets */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		523010172B66ECF400BB0F9A /* InputRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputRowView.swift; sourceTree = "<group>"; };
 		5274AFDB2B5C34160016EBCA /* ShoppingMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingMate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5274AFDE2B5C34160016EBCA /* ShoppingMateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingMateApp.swift; sourceTree = "<group>"; };
 		5274AFE22B5C34190016EBCA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				5274B0152B5C487B0016EBCA /* LogInEmailView.swift */,
 				5274B0172B5C57410016EBCA /* AuthenticationManager.swift */,
 				527B420F2B5C7E7B000B414E /* SettingsView.swift */,
+				523010172B66ECF400BB0F9A /* InputRowView.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				5274B0142B5C46480016EBCA /* AuthenticationView.swift in Sources */,
 				5274B0182B5C57410016EBCA /* AuthenticationManager.swift in Sources */,
 				527B42102B5C7E7B000B414E /* SettingsView.swift in Sources */,
+				523010182B66ECF400BB0F9A /* InputRowView.swift in Sources */,
 				5274B0162B5C487B0016EBCA /* LogInEmailView.swift in Sources */,
 				527B420E2B5C7739000B414E /* RootView.swift in Sources */,
 			);
@@ -480,6 +484,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -509,6 +514,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

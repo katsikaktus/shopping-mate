@@ -23,7 +23,7 @@ struct RootView: View {
         }
         .fullScreenCover(isPresented: $showLogInView, content: {
             NavigationStack{
-                AuthenticationView()
+                AuthenticationView(showLogInView: $showLogInView)
             }
         })
     }
