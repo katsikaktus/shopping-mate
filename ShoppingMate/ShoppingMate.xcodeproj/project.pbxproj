@@ -19,8 +19,10 @@
 		5274B00E2B5C39430016EBCA /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5274B00D2B5C39430016EBCA /* FirebaseAnalyticsSwift */; };
 		5274B0112B5C44D50016EBCA /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5274B0102B5C44D50016EBCA /* FirebaseAuth */; };
 		5274B0142B5C46480016EBCA /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5274B0132B5C46480016EBCA /* AuthenticationView.swift */; };
-		5274B0162B5C487B0016EBCA /* LogInEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5274B0152B5C487B0016EBCA /* LogInEmailView.swift */; };
+		5274B0162B5C487B0016EBCA /* SignUpEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5274B0152B5C487B0016EBCA /* SignUpEmailView.swift */; };
 		5274B0182B5C57410016EBCA /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5274B0172B5C57410016EBCA /* AuthenticationManager.swift */; };
+		5276F7CB2B6DB1290020CBB2 /* SignInEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5276F7C92B6DB1200020CBB2 /* SignInEmailViewModel.swift */; };
+		5276F7CE2B6DB1460020CBB2 /* SignUpEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5276F7CC2B6DB1410020CBB2 /* SignUpEmailViewModel.swift */; };
 		527B420E2B5C7739000B414E /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527B420D2B5C7739000B414E /* RootView.swift */; };
 		527B42102B5C7E7B000B414E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527B420F2B5C7E7B000B414E /* SettingsView.swift */; };
 /* End PBXBuildFile section */
@@ -55,8 +57,10 @@
 		5274AFFB2B5C34190016EBCA /* ShoppingMateUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingMateUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		5274B0082B5C37250016EBCA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5274B0132B5C46480016EBCA /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
-		5274B0152B5C487B0016EBCA /* LogInEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInEmailView.swift; sourceTree = "<group>"; };
+		5274B0152B5C487B0016EBCA /* SignUpEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailView.swift; sourceTree = "<group>"; };
 		5274B0172B5C57410016EBCA /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		5276F7C92B6DB1200020CBB2 /* SignInEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEmailViewModel.swift; sourceTree = "<group>"; };
+		5276F7CC2B6DB1410020CBB2 /* SignUpEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailViewModel.swift; sourceTree = "<group>"; };
 		527B420D2B5C7739000B414E /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		527B420F2B5C7E7B000B414E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -159,10 +163,12 @@
 			children = (
 				527B420D2B5C7739000B414E /* RootView.swift */,
 				5274B0132B5C46480016EBCA /* AuthenticationView.swift */,
-				5274B0152B5C487B0016EBCA /* LogInEmailView.swift */,
-				5274B0172B5C57410016EBCA /* AuthenticationManager.swift */,
+				5276F7C92B6DB1200020CBB2 /* SignInEmailViewModel.swift */,
+				5274B0152B5C487B0016EBCA /* SignUpEmailView.swift */,
+				5276F7CC2B6DB1410020CBB2 /* SignUpEmailViewModel.swift */,
 				527B420F2B5C7E7B000B414E /* SettingsView.swift */,
 				523010172B66ECF400BB0F9A /* InputRowView.swift */,
+				5274B0172B5C57410016EBCA /* AuthenticationManager.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -307,11 +313,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				5274AFDF2B5C34160016EBCA /* ShoppingMateApp.swift in Sources */,
+				5276F7CB2B6DB1290020CBB2 /* SignInEmailViewModel.swift in Sources */,
 				5274B0142B5C46480016EBCA /* AuthenticationView.swift in Sources */,
 				5274B0182B5C57410016EBCA /* AuthenticationManager.swift in Sources */,
 				527B42102B5C7E7B000B414E /* SettingsView.swift in Sources */,
 				523010182B66ECF400BB0F9A /* InputRowView.swift in Sources */,
-				5274B0162B5C487B0016EBCA /* LogInEmailView.swift in Sources */,
+				5276F7CE2B6DB1460020CBB2 /* SignUpEmailViewModel.swift in Sources */,
+				5274B0162B5C487B0016EBCA /* SignUpEmailView.swift in Sources */,
 				527B420E2B5C7739000B414E /* RootView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -484,7 +492,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -514,7 +522,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
