@@ -9,25 +9,30 @@ import SwiftUI
 
 
 struct SignUpEmailView: View {
-    @State var email = ""
-    @State var password = ""
+    @State private var userName = ""
+    @State private var email = ""
+    @State private var password = ""
+    @State private var confirmPassword = ""
     
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     @EnvironmentObject private var viewModel: AuthViewModel
     
     var body: some View {
         ScrollView {
-            Spacer(minLength: 150)
-            
+            AppLogoView()
+  
             VStack(alignment:.leading) {
-                Spacer(minLength: 32)
+                Spacer(minLength: 16)
                 signUpTitle
+                userNameTextField
                 emailTextField
                 passwordTextField
-                Spacer(minLength: 32)
+                confirmPasswordTextField
+                Spacer(minLength: 40)
                 signUpButton
-                Spacer(minLength: 32)
+                Spacer(minLength: 116)
                 signInPrompt
+                
                 
             }
             .padding(.horizontal, 24)
@@ -44,16 +49,25 @@ struct SignUpEmailView: View {
 extension SignUpEmailView{
     
     private var signUpTitle: some View {
-        Text ("Sign up").font(.title).bold().padding(.horizontal)
+        Text ("Create an account").font(.title).bold().padding(.horizontal)
         
     }
     
+    private var userNameTextField: some View {
+        InputRowView(iconName: "person", placeholder: "Create your username", text: $email, isSecure: false)
+    }
+    
     private var emailTextField: some View {
-        InputRowView(iconName: "envelope", placeholder: "Email...", text: $email, isSecure: false)
+        InputRowView(iconName: "envelope", placeholder: "Enter your email", text: $email, isSecure: false)
+            .textInputAutocapitalization(.never)
     }
     
     private var passwordTextField: some View {
-        InputRowView(iconName: "lock", placeholder: "Password...", text: $password, isSecure: true)
+        InputRowView(iconName: "lock", placeholder: "Create your password", text: $password, isSecure: true)
+    }
+    
+    private var confirmPasswordTextField: some View {
+        InputRowView(iconName: "lock", placeholder: "Confirm your password", text: $confirmPassword, isSecure: true)
     }
     
     private var signUpButton: some View {
@@ -81,11 +95,11 @@ extension SignUpEmailView{
     }
     
     private var signInPrompt: some View {
-        HStack() {
+        HStack(spacing: 3) {
             Spacer()
             Text("Already have an account ? ")
             Button {
-                self.presentationMode.wrappedValue.dismiss()
+                dismiss()
             } label: {
                 Text("Sign in").bold()
             }

@@ -43,28 +43,14 @@ extension SignInView{
     private var contentScrollView: some View {
         ScrollView {
             VStack {
-                logoView
+                AppLogoView()
                 formView
             }
         }
         .padding(.vertical)
     }
     
-    private var logoView: some View {
-        HStack {
-            Spacer()
-            Image("loginImage")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .scaledToFit()
-                .frame(width: 250, height: 150) // Set the desired width and height
-                .clipShape(Circle()) // Clip the image into a circle
-                .shadow(radius: 1) // Optional: Add a shadow for a nice effec
-                .padding(.vertical)
-            Spacer()
-        }
-    }
-    
+
     private var formView: some View {
         VStack(alignment: .leading) {
             Spacer(minLength: 16)
@@ -73,7 +59,7 @@ extension SignInView{
             passwordTextField
             forgotPasswordPrompt
             Spacer(minLength: 16)
-            logInButton
+            signInButton
             Spacer(minLength: 40)
             alternativeLoginOptions
             Spacer(minLength: 48)
@@ -90,12 +76,12 @@ extension SignInView{
     }
     
     private var emailTextField: some View {
-        InputRowView(iconName: "envelope", placeholder: "Email...", text: $email, isSecure: false)
+        InputRowView(iconName: "envelope", placeholder: "Enter your email", text: $email, isSecure: false)
             .textInputAutocapitalization(.never)
     }
     
     private var passwordTextField: some View {
-        InputRowView(iconName: "lock", placeholder: "Password...", text: $password, isSecure: true)
+        InputRowView(iconName: "lock", placeholder: "Enter your password", text: $password, isSecure: true)
     }
     
     private var forgotPasswordPrompt: some View {
@@ -105,7 +91,7 @@ extension SignInView{
         }
     }
     
-    private var logInButton: some View {
+    private var signInButton: some View {
         HStack{
             Spacer().frame(width: 180)
             Button(action: {
@@ -175,6 +161,7 @@ extension SignInView{
             Text("Don't have an account ? ")
             NavigationLink {
                 SignUpEmailView()
+                    .navigationBarBackButtonHidden(true)
             } label: {
                 Text("Sign up").bold()
             }
