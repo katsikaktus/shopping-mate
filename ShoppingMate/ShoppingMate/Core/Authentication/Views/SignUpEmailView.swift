@@ -9,14 +9,11 @@ import SwiftUI
 
 
 struct SignUpEmailView: View {
+    @State var email = ""
+    @State var password = ""
     
     @Environment(\.presentationMode) var presentationMode
-
-    
-    @StateObject private var viewModel = SignUpEmailViewModel()
-    
-    @Binding var showSignInView: Bool
-
+    @EnvironmentObject private var viewModel: AuthViewModel
     
     var body: some View {
         ScrollView {
@@ -40,9 +37,8 @@ struct SignUpEmailView: View {
 }
 
 #Preview {
-    NavigationStack{
-        SignUpEmailView(showSignInView: .constant(false))
-    }
+    SignUpEmailView()
+    
 }
 
 extension SignUpEmailView{
@@ -53,11 +49,11 @@ extension SignUpEmailView{
     }
     
     private var emailTextField: some View {
-        InputRowView(iconName: "envelope", placeholder: "Email...", text: $viewModel.email, isSecure: false)
+        InputRowView(iconName: "envelope", placeholder: "Email...", text: $email, isSecure: false)
     }
     
     private var passwordTextField: some View {
-        InputRowView(iconName: "lock", placeholder: "Password...", text: $viewModel.password, isSecure: true)
+        InputRowView(iconName: "lock", placeholder: "Password...", text: $password, isSecure: true)
     }
     
     private var signUpButton: some View {
@@ -67,10 +63,7 @@ extension SignUpEmailView{
             Button(action: {
                 // Perform login action here
                 Task {
-                    let isUserCreated = await viewModel.signUp()
-                    if isUserCreated {
-                        showSignInView = false
-                    }
+                    await viewModel.signUp(email: email, password: password)
                 }
             }) {
                 HStack {

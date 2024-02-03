@@ -7,31 +7,28 @@
 
 import SwiftUI
 
-
-
-
-struct AuthenticationView: View {
+struct SignInView: View {
     
-    @Binding var showSignInView: Bool
-    
-    @StateObject private var viewModel = SignInEmailViewModel()
-    
+    @State var email = ""
+    @State var password = ""
+    @EnvironmentObject var viewModel: AuthViewModel
+        
     var body: some View {
-        ZStack(alignment: .bottom) {
-            bottomBackground
-            contentScrollView
+        NavigationStack{
+            ZStack(alignment: .bottom) {
+                bottomBackground
+                contentScrollView
+            }
         }
     }
 }
 
 #Preview {
-    NavigationStack{
-        AuthenticationView(showSignInView: .constant(true))
-    }
+    SignInView()
 }
 
 
-extension AuthenticationView{
+extension SignInView{
     
     private var bottomBackground: some View {
         VStack {
@@ -79,7 +76,7 @@ extension AuthenticationView{
             logInButton
             Spacer(minLength: 40)
             alternativeLoginOptions
-            Spacer(minLength: 60)
+            Spacer(minLength: 48)
             signUpPrompt
         }
         .padding(.horizontal, 24)
@@ -93,11 +90,12 @@ extension AuthenticationView{
     }
     
     private var emailTextField: some View {
-        InputRowView(iconName: "envelope", placeholder: "Email...", text: $viewModel.email, isSecure: false)
+        InputRowView(iconName: "envelope", placeholder: "Email...", text: $email, isSecure: false)
+            .textInputAutocapitalization(.never)
     }
     
     private var passwordTextField: some View {
-        InputRowView(iconName: "lock", placeholder: "Password...", text: $viewModel.password, isSecure: true)
+        InputRowView(iconName: "lock", placeholder: "Password...", text: $password, isSecure: true)
     }
     
     private var forgotPasswordPrompt: some View {
@@ -112,10 +110,7 @@ extension AuthenticationView{
             Spacer().frame(width: 180)
             Button(action: {
                 Task {
-                    let isAuthenticated = await viewModel.signIn()
-                    if isAuthenticated {
-                        showSignInView = false
-                    }
+                    await viewModel.signIn(email: email, password: password)
                 }
             }) {
                 HStack {
@@ -179,7 +174,7 @@ extension AuthenticationView{
             Spacer()
             Text("Don't have an account ? ")
             NavigationLink {
-                SignUpEmailView(showSignInView: $showSignInView)
+                SignUpEmailView()
             } label: {
                 Text("Sign up").bold()
             }
