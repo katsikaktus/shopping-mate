@@ -52,7 +52,7 @@ extension SignUpEmailView{
     }
     
     private var userNameTextField: some View {
-        TextFieldRowView(iconName: "person", placeholder: "Create your username", text: $email, isSecure: false)
+        TextFieldRowView(iconName: "person", placeholder: "Create your username", text: $userName, isSecure: false)
     }
     
     private var emailTextField: some View {
@@ -71,7 +71,7 @@ extension SignUpEmailView{
     private var signUpButton: some View {
         SignButton(
             buttonText: "Sign up",
-            action: { await viewModel.signUp(email: email, password: password) },
+            action: { await viewModel.signUp(email: email, password: password, username: userName) },
             iconSystemName: "arrow.right"
         )
     }

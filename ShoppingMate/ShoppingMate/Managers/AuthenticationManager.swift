@@ -7,6 +7,8 @@
 
 import Foundation
 import FirebaseAuth
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 
 final class AuthenticationManager {
@@ -24,12 +26,20 @@ final class AuthenticationManager {
     
     // Once the user is authenticated, they are saved on the SDK locally
     @discardableResult
-    func createUser(email: String, password: String) async throws -> AuthenticatedUser {
-       let authDataResult = try await Auth.auth().createUser(withEmail: email, password: password)
+    func createUser(email: String, password: String, username: String) async throws -> AuthenticatedUser {
+        
+        let authDataResult = try await Auth.auth().createUser(withEmail: email, password: password)
+        print("DEBUG: Manager authDataResult", authDataResult )
+
+        let userProfile = UserProfile(id: authDataResult.user.uid, username: username, email: email)
+        print("DEBUG: Manager userProfile", userProfile )
+
+        
+        let encodedUser = try Firestore.Encoder().encode(userProfile)
+        try await Firestore.firestore().collection("users").document(userProfile.id).setData(encodedUser)
+        print("DEBUG: Manager")
         return AuthenticatedUser(user: authDataResult.user)
     }
-    
-    
     
     @discardableResult
     func signIn(email: String, password: String) async throws -> AuthenticatedUser{

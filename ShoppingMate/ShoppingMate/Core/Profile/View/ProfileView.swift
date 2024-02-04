@@ -11,7 +11,7 @@ import SwiftUI
 
 struct ProfileView: View {
     
-    @StateObject private var viewModel = ProfileViewModel()
+    @EnvironmentObject private var viewModel: AuthViewModel
     
     var body: some View {
         List{
@@ -45,7 +45,7 @@ extension ProfileView {
     private var userDetails: some View {
         Section {
             HStack {
-                Text("KK")
+                Text(viewModel.currentUser?.username ?? "")
                     .font(.title)
                     .fontWeight(.semibold)
                     .foregroundStyle(Color.theme.backgroundSecondaryColor)
@@ -54,11 +54,11 @@ extension ProfileView {
                     .clipShape(Circle())
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Katsi Kaktus")
+                    Text(viewModel.currentUser?.username ?? "")
                         .font(.subheadline)
                         .fontWeight(.semibold)
                         .padding(.top, 4)
-                    Text("katsikaktus@gmail.com")
+                    Text(viewModel.currentUser?.email ?? "")
                         .font(.footnote)
                         .tint(Color.theme.onBackgroundColor)
                 }

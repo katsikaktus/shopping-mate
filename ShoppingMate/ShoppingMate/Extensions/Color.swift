@@ -22,8 +22,8 @@ struct ColorTheme {
     let onErrorColor = Color("OnErrorColor")
     let onSecondaryColor = Color("OnSecondaryColor")
 
-    let primaryColor = Color("PrimaryColor")
-    let secondaryColor = Color("SecondaryColor")
+    let primaryColor = Color("FirstColor")
+    let secondaryColor = Color("SecondColor")
 
     
 }
