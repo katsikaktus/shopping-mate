@@ -52,20 +52,20 @@ extension SignUpEmailView{
     }
     
     private var userNameTextField: some View {
-        InputRowView(iconName: "person", placeholder: "Create your username", text: $email, isSecure: false)
+        TextFieldRowView(iconName: "person", placeholder: "Create your username", text: $email, isSecure: false)
     }
     
     private var emailTextField: some View {
-        InputRowView(iconName: "envelope", placeholder: "Enter your email", text: $email, isSecure: false)
+        TextFieldRowView(iconName: "envelope", placeholder: "Enter your email", text: $email, isSecure: false)
             .textInputAutocapitalization(.never)
     }
     
     private var passwordTextField: some View {
-        InputRowView(iconName: "lock", placeholder: "Create your password", text: $password, isSecure: true)
+        TextFieldRowView(iconName: "lock", placeholder: "Create your password", text: $password, isSecure: true)
     }
     
     private var confirmPasswordTextField: some View {
-        InputRowView(iconName: "lock", placeholder: "Confirm your password", text: $confirmPassword, isSecure: true)
+        TextFieldRowView(iconName: "lock", placeholder: "Confirm your password", text: $confirmPassword, isSecure: true)
     }
     
     private var signUpButton: some View {

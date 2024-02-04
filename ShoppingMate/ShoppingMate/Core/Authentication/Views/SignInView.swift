@@ -111,12 +111,12 @@ extension SignInView{
     }
     
     private var emailTextField: some View {
-        InputRowView(iconName: "envelope", placeholder: "Enter your email", text: $email, isSecure: false)
+        TextFieldRowView(iconName: "envelope", placeholder: "Enter your email", text: $email, isSecure: false)
             .textInputAutocapitalization(.never)
     }
     
     private var passwordTextField: some View {
-        InputRowView(iconName: "lock", placeholder: "Enter your password", text: $password, isSecure: true)
+        TextFieldRowView(iconName: "lock", placeholder: "Enter your password", text: $password, isSecure: true)
     }
     
     private var forgotPasswordPrompt: some View {

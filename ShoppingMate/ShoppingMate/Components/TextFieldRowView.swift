@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct InputRowView: View {
+struct TextFieldRowView: View {
     var iconName: String
     var placeholder: String
     @Binding var text: String
@@ -34,6 +34,6 @@ struct InputRowView: View {
 }
 
 #Preview {
-    InputRowView(iconName: "envelope", placeholder: "Email...", text: .constant(""), isSecure: false)
+    TextFieldRowView(iconName: "envelope", placeholder: "Email...", text: .constant(""), isSecure: false)
 
 }

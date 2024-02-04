@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		523010182B66ECF400BB0F9A /* InputRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523010172B66ECF400BB0F9A /* InputRowView.swift */; };
+		523010182B66ECF400BB0F9A /* TextFieldRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523010172B66ECF400BB0F9A /* TextFieldRowView.swift */; };
 		5268A08D2B6EEC6E00BEFF11 /* AuthenticatedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5268A08C2B6EEC6E00BEFF11 /* AuthenticatedUser.swift */; };
 		5268A0902B6EED0200BEFF11 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5268A08F2B6EED0200BEFF11 /* AuthViewModel.swift */; };
 		5268A0942B6EF57E00BEFF11 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5268A0932B6EF57E00BEFF11 /* ProfileView.swift */; };
@@ -26,7 +26,8 @@
 		5274B0162B5C487B0016EBCA /* SignUpEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5274B0152B5C487B0016EBCA /* SignUpEmailView.swift */; };
 		5274B0182B5C57410016EBCA /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5274B0172B5C57410016EBCA /* AuthenticationManager.swift */; };
 		527B420E2B5C7739000B414E /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527B420D2B5C7739000B414E /* RootView.swift */; };
-		527B42102B5C7E7B000B414E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527B420F2B5C7E7B000B414E /* SettingsView.swift */; };
+		52A18ACB2B6FFFE800C912B2 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A18ACA2B6FFFE800C912B2 /* ProfileViewModel.swift */; };
+		52A18ACF2B70042E00C912B2 /* SettingsRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A18ACE2B70042E00C912B2 /* SettingsRowView.swift */; };
 		52EEBF982B6FB63400531CBA /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EEBF972B6FB63400531CBA /* Color.swift */; };
 		52EEBF9C2B6FFA5200531CBA /* SignButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EEBF9B2B6FFA5200531CBA /* SignButton.swift */; };
 		52F3F68F2B6E8E10001E6405 /* Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F3F68E2B6E8E10001E6405 /* Binding.swift */; };
@@ -51,7 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		523010172B66ECF400BB0F9A /* InputRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputRowView.swift; sourceTree = "<group>"; };
+		523010172B66ECF400BB0F9A /* TextFieldRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldRowView.swift; sourceTree = "<group>"; };
 		5268A08C2B6EEC6E00BEFF11 /* AuthenticatedUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticatedUser.swift; sourceTree = "<group>"; };
 		5268A08F2B6EED0200BEFF11 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		5268A0932B6EF57E00BEFF11 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -70,7 +71,8 @@
 		5274B0152B5C487B0016EBCA /* SignUpEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailView.swift; sourceTree = "<group>"; };
 		5274B0172B5C57410016EBCA /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		527B420D2B5C7739000B414E /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
-		527B420F2B5C7E7B000B414E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		52A18ACA2B6FFFE800C912B2 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		52A18ACE2B70042E00C912B2 /* SettingsRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRowView.swift; sourceTree = "<group>"; };
 		52EEBF972B6FB63400531CBA /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		52EEBF9B2B6FFA5200531CBA /* SignButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignButton.swift; sourceTree = "<group>"; };
 		52F3F68E2B6E8E10001E6405 /* Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Binding.swift; sourceTree = "<group>"; };
@@ -125,8 +127,8 @@
 		5268A0922B6EF56A00BEFF11 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				527B420F2B5C7E7B000B414E /* SettingsView.swift */,
-				5268A0932B6EF57E00BEFF11 /* ProfileView.swift */,
+				52A18ACC2B6FFFEF00C912B2 /* View */,
+				52A18ACD2B6FFFF700C912B2 /* ViewModel */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -143,7 +145,8 @@
 			isa = PBXGroup;
 			children = (
 				5268A09C2B6EFD5C00BEFF11 /* AppLogoView.swift */,
-				523010172B66ECF400BB0F9A /* InputRowView.swift */,
+				523010172B66ECF400BB0F9A /* TextFieldRowView.swift */,
+				52A18ACE2B70042E00C912B2 /* SettingsRowView.swift */,
 				52EEBF9B2B6FFA5200531CBA /* SignButton.swift */,
 			);
 			path = Components;
@@ -269,6 +272,22 @@
 				5268A0912B6EED0900BEFF11 /* ViewModel */,
 			);
 			path = Authentication;
+			sourceTree = "<group>";
+		};
+		52A18ACC2B6FFFEF00C912B2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5268A0932B6EF57E00BEFF11 /* ProfileView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		52A18ACD2B6FFFF700C912B2 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				52A18ACA2B6FFFE800C912B2 /* ProfileViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -412,12 +431,13 @@
 			files = (
 				5274AFDF2B5C34160016EBCA /* ShoppingMateApp.swift in Sources */,
 				5274B0142B5C46480016EBCA /* SignInView.swift in Sources */,
+				52A18ACF2B70042E00C912B2 /* SettingsRowView.swift in Sources */,
 				5274B0182B5C57410016EBCA /* AuthenticationManager.swift in Sources */,
 				5268A08D2B6EEC6E00BEFF11 /* AuthenticatedUser.swift in Sources */,
 				52EEBF982B6FB63400531CBA /* Color.swift in Sources */,
-				527B42102B5C7E7B000B414E /* SettingsView.swift in Sources */,
 				5268A09D2B6EFD5C00BEFF11 /* AppLogoView.swift in Sources */,
-				523010182B66ECF400BB0F9A /* InputRowView.swift in Sources */,
+				52A18ACB2B6FFFE800C912B2 /* ProfileViewModel.swift in Sources */,
+				523010182B66ECF400BB0F9A /* TextFieldRowView.swift in Sources */,
 				5268A0902B6EED0200BEFF11 /* AuthViewModel.swift in Sources */,
 				5274B0162B5C487B0016EBCA /* SignUpEmailView.swift in Sources */,
 				527B420E2B5C7739000B414E /* RootView.swift in Sources */,
