@@ -12,19 +12,36 @@ struct SignInView: View {
     @State var email = ""
     @State var password = ""
     @EnvironmentObject var viewModel: AuthViewModel
-        
+    
     var body: some View {
         NavigationStack{
             ZStack(alignment: .bottom) {
+                topBackground
                 bottomBackground
                 contentScrollView
+                
             }
+            
         }
     }
 }
 
 #Preview {
-    SignInView()
+    NavigationStack{
+        SignInView()
+            .preferredColorScheme(.dark)
+            .previewDisplayName("Dark Mode")
+    }
+    
+}
+
+#Preview {
+    NavigationStack{
+        SignInView()
+            .preferredColorScheme(.light)
+            .previewDisplayName("Light Mode")
+    }
+    
 }
 
 
@@ -34,23 +51,41 @@ extension SignInView{
         VStack {
             Spacer()
             Rectangle()
-                .fill(Color.white)
+                .fill(Color.theme.backgroundMainColor)
                 .frame(height: 300)
         }
         .edgesIgnoringSafeArea(.bottom)
+    }
+    
+    private var topBackground: some View {
+        VStack {
+            Rectangle()
+                .fill(Color.theme.backgroundSecondaryColor)
+                .frame(height: 500)
+            Spacer()
+
+        }
+        .edgesIgnoringSafeArea(.top)
     }
     
     private var contentScrollView: some View {
         ScrollView {
             VStack {
                 AppLogoView()
+                    .background(Color.theme.backgroundSecondaryColor)
                 formView
+                    .clipShape(RoundedRectangle(cornerRadius: 24))
+                    .shadow(color: Color.theme.backgroundMainColor, radius: 1, y:-3)
+                
+                
+                
+                
             }
         }
         .padding(.vertical)
     }
     
-
+    
     private var formView: some View {
         VStack(alignment: .leading) {
             Spacer(minLength: 16)
@@ -66,7 +101,7 @@ extension SignInView{
             signUpPrompt
         }
         .padding(.horizontal, 24)
-        .background(Color.white)
+        .background(Color.theme.backgroundMainColor)
         // Apply background here
     }
     
@@ -92,25 +127,11 @@ extension SignInView{
     }
     
     private var signInButton: some View {
-        HStack{
-            Spacer().frame(width: 180)
-            Button(action: {
-                Task {
-                    await viewModel.signIn(email: email, password: password)
-                }
-            }) {
-                HStack {
-                    Text("Sign in")
-                        .font(.headline)
-                    Image(systemName: "arrow.right") // Arrow icon
-                }
-                .padding()
-                .frame(minWidth: 0, maxWidth: .infinity)
-                .background(Color.white)
-                .clipShape(RoundedRectangle(cornerRadius: 40))
-                .shadow(color: Color.gray, radius: 2, x: 1, y: 1.5)
-            }
-        }
+        SignButton(
+            buttonText: "Sign in",
+            action: { await viewModel.signIn(email: email, password: password) },
+            iconSystemName: "arrow.right"
+        )
     }
     
     
@@ -133,7 +154,7 @@ extension SignInView{
                 // Right line
                 Rectangle()
                     .frame(height: 1)
-                    .foregroundColor(.gray)
+                    .foregroundColor(Color.theme.onBackgroundColor)
                     .frame(maxWidth: .infinity) // Allow the line to expand
             }
             .frame(height: 20) // Adjust the height as needed
@@ -151,12 +172,12 @@ extension SignInView{
                     .padding(.leading)
                 Spacer()
             }
-            .foregroundStyle(Color.black).opacity(0.7)
+            .foregroundStyle(Color.theme.onBackgroundColor)
         }
     }
     
     private var signUpPrompt: some View {
-        HStack() {
+        HStack(spacing: 3) {
             Spacer()
             Text("Don't have an account ? ")
             NavigationLink {
@@ -164,6 +185,7 @@ extension SignInView{
                     .navigationBarBackButtonHidden(true)
             } label: {
                 Text("Sign up").bold()
+                    .foregroundStyle(Color.theme.onBackgroundColor)
             }
             Spacer()
         }.padding()

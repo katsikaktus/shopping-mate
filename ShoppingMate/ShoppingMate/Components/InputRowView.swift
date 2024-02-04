@@ -16,7 +16,7 @@ struct InputRowView: View {
     var body: some View {
         HStack {
             Image(systemName: iconName)
-                .foregroundColor(.gray)
+                .foregroundColor(Color.theme.onBackgroundColor)
                 .frame(width: 28, alignment: .center)
                 .padding(.trailing, 8)
             
@@ -27,9 +27,9 @@ struct InputRowView: View {
             }
         }
         .padding()
-        .background(Color.white)
+        .background(Color.theme.backgroundSecondaryColor)
         .clipShape(RoundedRectangle(cornerRadius: 20))
-        .shadow(color: Color.gray, radius: 2, x: 1, y: 1.5)
+        .shadow(radius: 1)
     }
 }
 

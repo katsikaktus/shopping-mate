@@ -32,8 +32,6 @@ struct SignUpEmailView: View {
                 signUpButton
                 Spacer(minLength: 116)
                 signInPrompt
-                
-                
             }
             .padding(.horizontal, 24)
         }
@@ -71,27 +69,11 @@ extension SignUpEmailView{
     }
     
     private var signUpButton: some View {
-        HStack{
-            Spacer().frame(width: 180)
-            // Login Button
-            Button(action: {
-                // Perform login action here
-                Task {
-                    await viewModel.signUp(email: email, password: password)
-                }
-            }) {
-                HStack {
-                    Text("Sign up")
-                        .font(.headline)
-                    Image(systemName: "arrow.right") // Arrow icon
-                }
-                .padding()
-                .frame(minWidth: 0, maxWidth: .infinity) // Makes the button wider
-                .background(Color.white)
-                .clipShape(RoundedRectangle(cornerRadius: 40))
-                .shadow(color: Color.gray, radius: 2, x: 1, y: 1.5)
-            }
-        }
+        SignButton(
+            buttonText: "Sign up",
+            action: { await viewModel.signUp(email: email, password: password) },
+            iconSystemName: "arrow.right"
+        )
     }
     
     private var signInPrompt: some View {
@@ -102,6 +84,7 @@ extension SignUpEmailView{
                 dismiss()
             } label: {
                 Text("Sign in").bold()
+                    .foregroundStyle(Color.theme.onBackgroundColor)
             }
             Spacer()
         }.padding()
