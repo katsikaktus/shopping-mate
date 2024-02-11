@@ -22,6 +22,10 @@ struct AuthenticatedUser {
     
 }
 
+protocol AuthenticationFormProtocol {
+    var formIsValid: Bool { get }
+}
+
 @MainActor
 final class AuthViewModel: ObservableObject  {
     

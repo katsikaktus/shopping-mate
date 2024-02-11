@@ -11,6 +11,7 @@ struct SignButton: View {
     let buttonText: String
     let action: () async -> Void
     let iconSystemName: String
+    let formIsValid: Bool
     
     var body: some View {
         HStack {
@@ -29,6 +30,8 @@ struct SignButton: View {
                 .padding()
                 .frame(minWidth: 0, maxWidth: .infinity)
                 .background(Color.theme.primaryColor)
+                .disabled(!formIsValid)
+                .opacity(formIsValid ? 1.0 : 0.5)
                 .clipShape(RoundedRectangle(cornerRadius: 40))
                 .shadow(radius: 2)
             }

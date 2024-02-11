@@ -27,7 +27,26 @@ struct SignUpEmailView: View {
                 userNameTextField
                 emailTextField
                 passwordTextField
-                confirmPasswordTextField
+                
+                ZStack(alignment: .trailing) {
+                    confirmPasswordTextField
+                    if !password.isEmpty && !confirmPassword.isEmpty {
+                        if password == confirmPassword {
+                            Image(systemName: "checkmark.circle.fill")
+                                .imageScale(.large)
+                                .fontWeight(.bold)
+                                .foregroundStyle(Color(.systemGreen))
+                                .padding()
+                        } else {
+                            Image(systemName: "xmark.circle.fill")
+                                .imageScale(.large)
+                                .fontWeight(.bold)
+                                .foregroundStyle(Color(.systemGray))
+                                .padding()
+                        }
+                    }
+                }
+                
                 Spacer(minLength: 40)
                 signUpButton
                 Spacer(minLength: 116)
@@ -40,7 +59,7 @@ struct SignUpEmailView: View {
 }
 
 #Preview {
-    SignUpEmailView()
+    SignUpEmailView().environmentObject(AuthViewModel())
     
 }
 
@@ -72,7 +91,7 @@ extension SignUpEmailView{
         SignButton(
             buttonText: "Sign up",
             action: { await viewModel.signUp(email: email, password: password, username: userName) },
-            iconSystemName: "arrow.right"
+            iconSystemName: "arrow.right", formIsValid: formIsValid
         )
     }
     
@@ -88,5 +107,16 @@ extension SignUpEmailView{
             }
             Spacer()
         }.padding()
+    }
+}
+
+extension SignUpEmailView: AuthenticationFormProtocol {
+    var formIsValid: Bool {
+        return !email.isEmpty
+        && email.contains("@")
+        && !password.isEmpty
+        && password.count > 5
+        && confirmPassword == password
+        && !userName.isEmpty
     }
 }

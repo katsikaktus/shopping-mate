@@ -76,10 +76,6 @@ extension SignInView{
                 formView
                     .clipShape(RoundedRectangle(cornerRadius: 24))
                     .shadow(color: Color.theme.backgroundMainColor, radius: 1, y:-3)
-                
-                
-                
-                
             }
         }
         .padding(.vertical)
@@ -130,13 +126,11 @@ extension SignInView{
         SignButton(
             buttonText: "Sign in",
             action: { await viewModel.signIn(email: email, password: password) },
-            iconSystemName: "arrow.right"
+            iconSystemName: "arrow.right", 
+            formIsValid: formIsValid
         )
     }
-    
-    
-    
-    
+
     private var alternativeLoginOptions: some View {
         VStack{
             HStack {
@@ -189,5 +183,14 @@ extension SignInView{
             }
             Spacer()
         }.padding()
+    }
+}
+
+extension SignInView: AuthenticationFormProtocol {
+    var formIsValid: Bool {
+        return !email.isEmpty
+        && email.contains("@")
+        && !password.isEmpty
+        && password.count > 5
     }
 }
