@@ -25,14 +25,19 @@ struct AuthenticatedUser {
 @MainActor
 final class AuthViewModel: ObservableObject  {
     
-    @Published var currentUser: UserProfile?
-    @Published var userSession: AuthenticatedUser?
+    @Published var userProfile: UserProfile?
+    @Published var userFirebaseSession: AuthenticatedUser?
     
     init() {
+        print("DEBUG - AuthViewModel init")
         do {
-            self.userSession = try AuthenticationManager.shared.getAuthenticatedUser()
+            self.userFirebaseSession = try AuthenticationManager.shared.getAuthenticatedUser()
         } catch {
             print("Error: \(error)")
+        }
+        
+        Task {
+            await fetchUser()
         }
     }
     
@@ -44,10 +49,9 @@ final class AuthViewModel: ObservableObject  {
         
         do {
             let authenticatedUser = try await AuthenticationManager.shared.signIn(email: email, password: password)
-            self.userSession = authenticatedUser
-            self.currentUser = UserProfile(id: "String", username: "M", email: "mock@mail.com")
+            self.userFirebaseSession = authenticatedUser
+            await fetchUser()
             
-
         } catch {
             print("Error: \(error)")
         }
@@ -62,11 +66,9 @@ final class AuthViewModel: ObservableObject  {
         do {
             let authenticatedUser = try await AuthenticationManager.shared.createUser(email: email, password: password, username: username)
             
-            self.currentUser = UserProfile(id: authenticatedUser.uid, username: username, email: email)
+            self.userFirebaseSession = authenticatedUser
+            await fetchUser()
             
-            self.userSession = authenticatedUser
-            
-            print("DEBUG: AuthViewModel - self.currentUser", self.currentUser )
         } catch {
             print("Error: \(error)")
         }
@@ -74,7 +76,8 @@ final class AuthViewModel: ObservableObject  {
     
     func logout() throws {
         try AuthenticationManager.shared.logout()
-        self.userSession = nil
+        self.userFirebaseSession = nil
+        self.userProfile = nil
     }
     
     func resetPassword() async throws {
@@ -94,5 +97,9 @@ final class AuthViewModel: ObservableObject  {
     
     func updateEmail() async throws {
         try await AuthenticationManager.shared.updateEmail()
+    }
+    
+    func fetchUser() async {
+        self.userProfile = await AuthenticationManager.shared.fetchUser()
     }
 }

@@ -26,7 +26,6 @@
 		5274B0162B5C487B0016EBCA /* SignUpEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5274B0152B5C487B0016EBCA /* SignUpEmailView.swift */; };
 		5274B0182B5C57410016EBCA /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5274B0172B5C57410016EBCA /* AuthenticationManager.swift */; };
 		527B420E2B5C7739000B414E /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527B420D2B5C7739000B414E /* RootView.swift */; };
-		52A18ACB2B6FFFE800C912B2 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A18ACA2B6FFFE800C912B2 /* ProfileViewModel.swift */; };
 		52A18ACF2B70042E00C912B2 /* SettingsRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A18ACE2B70042E00C912B2 /* SettingsRowView.swift */; };
 		52A18AD52B702D4000C912B2 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 52A18AD42B702D4000C912B2 /* FirebaseFirestore */; };
 		52A18AD72B702D4800C912B2 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 52A18AD62B702D4800C912B2 /* FirebaseFirestoreSwift */; };
@@ -73,7 +72,6 @@
 		5274B0152B5C487B0016EBCA /* SignUpEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailView.swift; sourceTree = "<group>"; };
 		5274B0172B5C57410016EBCA /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		527B420D2B5C7739000B414E /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
-		52A18ACA2B6FFFE800C912B2 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		52A18ACE2B70042E00C912B2 /* SettingsRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRowView.swift; sourceTree = "<group>"; };
 		52EEBF972B6FB63400531CBA /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		52EEBF9B2B6FFA5200531CBA /* SignButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignButton.swift; sourceTree = "<group>"; };
@@ -132,7 +130,6 @@
 			isa = PBXGroup;
 			children = (
 				52A18ACC2B6FFFEF00C912B2 /* View */,
-				52A18ACD2B6FFFF700C912B2 /* ViewModel */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -286,14 +283,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		52A18ACD2B6FFFF700C912B2 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				52A18ACA2B6FFFE800C912B2 /* ProfileViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -442,7 +431,6 @@
 				5268A08D2B6EEC6E00BEFF11 /* UserProfile.swift in Sources */,
 				52EEBF982B6FB63400531CBA /* Color.swift in Sources */,
 				5268A09D2B6EFD5C00BEFF11 /* AppLogoView.swift in Sources */,
-				52A18ACB2B6FFFE800C912B2 /* ProfileViewModel.swift in Sources */,
 				523010182B66ECF400BB0F9A /* TextFieldRowView.swift in Sources */,
 				5268A0902B6EED0200BEFF11 /* AuthViewModel.swift in Sources */,
 				5274B0162B5C487B0016EBCA /* SignUpEmailView.swift in Sources */,

@@ -13,7 +13,7 @@ struct RootView: View {
     
     var body: some View {
         Group {
-            if viewModel.userSession != nil {
+            if viewModel.userFirebaseSession != nil {
                 ProfileView()
             } else {
                 SignInView()

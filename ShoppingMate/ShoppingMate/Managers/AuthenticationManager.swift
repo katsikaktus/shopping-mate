@@ -30,10 +30,10 @@ final class AuthenticationManager {
         
         let authDataResult = try await Auth.auth().createUser(withEmail: email, password: password)
         print("DEBUG: Manager authDataResult", authDataResult )
-
+        
         let userProfile = UserProfile(id: authDataResult.user.uid, username: username, email: email)
         print("DEBUG: Manager userProfile", userProfile )
-
+        
         
         let encodedUser = try Firestore.Encoder().encode(userProfile)
         try await Firestore.firestore().collection("users").document(userProfile.id).setData(encodedUser)
@@ -42,10 +42,11 @@ final class AuthenticationManager {
     }
     
     @discardableResult
-    func signIn(email: String, password: String) async throws -> AuthenticatedUser{
-       let authDataResult = try await Auth.auth().signIn(withEmail: email, password: password)
+    func signIn(email: String, password: String) async throws -> AuthenticatedUser {
+        let authDataResult = try await Auth.auth().signIn(withEmail: email, password: password)
         return AuthenticatedUser(user: authDataResult.user)
     }
+    
     
     func resetPassword(email: String) async throws {
         try await Auth.auth().sendPasswordReset(withEmail: email)
@@ -66,11 +67,25 @@ final class AuthenticationManager {
     }
     
     func logout() throws {
-        print("logout started")
         try Auth.auth().signOut()
-        print("logout finished")
+    }
+    
+    func fetchUser() async -> UserProfile? {
+        guard let uid = Auth.auth().currentUser?.uid else { return nil }
+        do {
+            // Attempt to fetch the document for the user
+            let snapshot = try await Firestore.firestore().collection("users").document(uid).getDocument()
+            
+            // Attempt to decode the document snapshot into a UserProfile object
+            let userProfile = try snapshot.data(as: UserProfile.self)
+            print("DEBUG: Manager userProfile", userProfile )
 
-        
+            return userProfile
+        } catch {
+            // Handle or log any errors that occur
+            print("Error fetching user: \(error.localizedDescription)")
+            return nil
+        }
     }
     
 }

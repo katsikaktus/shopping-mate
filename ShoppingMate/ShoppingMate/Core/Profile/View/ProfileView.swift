@@ -15,9 +15,11 @@ struct ProfileView: View {
     
     var body: some View {
         List{
-            userDetails
-            emailAndPasswordSection
-            accountOptions
+            if let _ = viewModel.userProfile {
+                userDetails
+                emailAndPasswordSection
+                accountOptions
+            }
         }
     }
 }
@@ -25,6 +27,7 @@ struct ProfileView: View {
 #Preview {
     NavigationStack{
         ProfileView()
+            .environmentObject(AuthViewModel())
             .preferredColorScheme(.dark)
             .previewDisplayName("Dark Mode")
     }
@@ -34,6 +37,7 @@ struct ProfileView: View {
 #Preview {
     NavigationStack{
         ProfileView()
+            .environmentObject(AuthViewModel())
             .preferredColorScheme(.light)
             .previewDisplayName("Light Mode")
     }
@@ -45,7 +49,7 @@ extension ProfileView {
     private var userDetails: some View {
         Section {
             HStack {
-                Text(viewModel.currentUser?.username ?? "")
+                Text(viewModel.userProfile?.initials ?? UserProfile.MOCK_USER.initials)
                     .font(.title)
                     .fontWeight(.semibold)
                     .foregroundStyle(Color.theme.backgroundSecondaryColor)
@@ -54,11 +58,11 @@ extension ProfileView {
                     .clipShape(Circle())
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(viewModel.currentUser?.username ?? "")
+                    Text(viewModel.userProfile?.username ?? UserProfile.MOCK_USER.username)
                         .font(.subheadline)
                         .fontWeight(.semibold)
                         .padding(.top, 4)
-                    Text(viewModel.currentUser?.email ?? "")
+                    Text(viewModel.userProfile?.email ?? UserProfile.MOCK_USER.email)
                         .font(.footnote)
                         .tint(Color.theme.onBackgroundColor)
                 }
