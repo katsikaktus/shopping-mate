@@ -19,6 +19,7 @@ final class AuthenticationManager {
     // Get value from the local SDK
     func getAuthenticatedUser() throws -> AuthenticatedUser {
         guard let user = Auth.auth().currentUser else {
+            // TODO - update with custom error
             throw URLError(.badServerResponse)
         }
         return AuthenticatedUser(user: user)

@@ -12,28 +12,46 @@ struct TextFieldRowView: View {
     var placeholder: String
     @Binding var text: String
     var isSecure: Bool
-
+    var showError: Bool // Indicates whether to show the error state
+    var errorMessage: String? // The error message to display
+    
+    
     var body: some View {
-        HStack {
-            Image(systemName: iconName)
-                .foregroundColor(Color.theme.onBackgroundColor)
-                .frame(width: 28, alignment: .center)
-                .padding(.trailing, 8)
+        VStack{
+            HStack {
+                Image(systemName: iconName)
+                    .foregroundColor(Color.theme.onBackgroundColor)
+                    .frame(width: 28, alignment: .center)
+                    .padding(.trailing, 8)
+                
+                if isSecure {
+                    SecureField(placeholder, text: $text)
+                } else {
+                    TextField(placeholder, text: $text)
+                }
+            }
+            .padding()
+            .background(Color.theme.backgroundSecondaryColor)
+            .overlay(RoundedRectangle(cornerRadius: 20)
+                .stroke(!showError ? Color.gray : Color.theme.errorColor, lineWidth: 0.5))
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .shadow(radius: 1)
+            .frame(minHeight: 50, maxHeight: 50)
             
-            if isSecure {
-                SecureField(placeholder, text: $text)
-            } else {
-                TextField(placeholder, text: $text)
+            HStack {
+                Spacer()
+                Text(errorMessage ?? " ")
+                    .font(.caption)
+                    .foregroundColor(Color.theme.errorColor)
+                    .padding(.horizontal)
+                    .opacity(showError ? 1 : 0) // Fully visible when there's an error, otherwise invisible
             }
         }
-        .padding()
-        .background(Color.theme.backgroundSecondaryColor)
-        .clipShape(RoundedRectangle(cornerRadius: 20))
-        .shadow(radius: 1)
     }
 }
 
 #Preview {
-    TextFieldRowView(iconName: "envelope", placeholder: "Email...", text: .constant(""), isSecure: false)
-
+    
+    TextFieldRowView(iconName: "envelope", placeholder: "Email...", text: .constant(""), isSecure: false, showError: true, errorMessage: "*Please enter a valid email")
+    
 }

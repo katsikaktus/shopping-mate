@@ -13,6 +13,9 @@ struct SignUpEmailView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var confirmPassword = ""
+    @State private var showError = false
+    @State private var isPasswordVisible = false
+    @State private var errorMessage = ""
     
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject private var viewModel: AuthViewModel
@@ -20,7 +23,7 @@ struct SignUpEmailView: View {
     var body: some View {
         ScrollView {
             AppLogoView()
-  
+            
             VStack(alignment:.leading) {
                 Spacer(minLength: 16)
                 signUpTitle
@@ -49,7 +52,7 @@ struct SignUpEmailView: View {
                 
                 Spacer(minLength: 40)
                 signUpButton
-                Spacer(minLength: 116)
+                Spacer(minLength: 80)
                 signInPrompt
             }
             .padding(.horizontal, 24)
@@ -71,27 +74,85 @@ extension SignUpEmailView{
     }
     
     private var userNameTextField: some View {
-        TextFieldRowView(iconName: "person", placeholder: "Create your username", text: $userName, isSecure: false)
+        TextFieldRowView(
+            iconName: "person",
+            placeholder: "Create your username",
+            text: $userName,
+            isSecure: false,
+            showError: viewModel.userNameError != nil,
+            errorMessage: viewModel.userNameError?.message ?? "")
     }
     
     private var emailTextField: some View {
-        TextFieldRowView(iconName: "envelope", placeholder: "Enter your email", text: $email, isSecure: false)
-            .textInputAutocapitalization(.never)
+        TextFieldRowView(
+            iconName: "envelope",
+            placeholder: "Enter your email",
+            text: $email,
+            isSecure: false,
+            showError: viewModel.emailError != nil,
+            errorMessage: viewModel.emailError?.message ?? "")
+        .textInputAutocapitalization(.never)
     }
     
     private var passwordTextField: some View {
-        TextFieldRowView(iconName: "lock", placeholder: "Create your password", text: $password, isSecure: true)
+        ZStack(alignment: .trailing) {
+            TextFieldRowView(
+                iconName: "lock",
+                placeholder: "Create your password",
+                text: $password,
+                isSecure: !isPasswordVisible,
+                showError: viewModel.passwordError != nil,
+                errorMessage: viewModel.passwordError?.message ?? "")
+            
+            Button(action: {
+                isPasswordVisible.toggle()
+            }) {
+                Image(systemName: isPasswordVisible ? "eye.slash" : "eye")
+                    .foregroundColor(.gray)
+                    .frame(width: 30, height: 30)
+                    .padding(.trailing)
+                    .padding(.bottom)
+            }
+        }
+        
     }
     
     private var confirmPasswordTextField: some View {
-        TextFieldRowView(iconName: "lock", placeholder: "Confirm your password", text: $confirmPassword, isSecure: true)
+        ZStack(alignment: .trailing) {
+            TextFieldRowView(
+                iconName: "lock",
+                placeholder: "Confirm your password",
+                text: $confirmPassword,
+                isSecure: !isPasswordVisible,
+                showError: viewModel.confirmPasswordError != nil,
+                errorMessage: viewModel.confirmPasswordError?.message ?? "")
+            
+            Button(action: {
+                isPasswordVisible.toggle()
+            }) {
+                Image(systemName: isPasswordVisible ? "eye.slash" : "eye")
+                    .foregroundColor(.gray)
+                    .frame(width: 30, height: 30)
+                    .padding(.trailing)
+                    .padding(.bottom)
+            }
+        }
     }
     
     private var signUpButton: some View {
-        SignButton(
+        ButtonComponent(
             buttonText: "Sign up",
-            action: { await viewModel.signUp(email: email, password: password, username: userName) },
-            iconSystemName: "arrow.right", formIsValid: formIsValid
+            action: {
+                viewModel.validateUserName(userName)
+                viewModel.validateEmail(email)
+                viewModel.validatePassword(password)
+                viewModel.validateConfirmPassword(password, confirmPassword: confirmPassword)
+                
+                if viewModel.isFormValidSignUp {
+                    await viewModel.signUp(email: email, password: password, username: userName)
+                }
+            },
+            formIsValid: viewModel.isFormValidSignUp
         )
     }
     
@@ -107,16 +168,5 @@ extension SignUpEmailView{
             }
             Spacer()
         }.padding()
-    }
-}
-
-extension SignUpEmailView: AuthenticationFormProtocol {
-    var formIsValid: Bool {
-        return !email.isEmpty
-        && email.contains("@")
-        && !password.isEmpty
-        && password.count > 5
-        && confirmPassword == password
-        && !userName.isEmpty
     }
 }

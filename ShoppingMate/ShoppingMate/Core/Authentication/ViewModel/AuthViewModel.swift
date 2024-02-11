@@ -22,22 +22,27 @@ struct AuthenticatedUser {
     
 }
 
-protocol AuthenticationFormProtocol {
-    var formIsValid: Bool { get }
-}
 
 @MainActor
 final class AuthViewModel: ObservableObject  {
     
     @Published var userProfile: UserProfile?
-    @Published var userFirebaseSession: AuthenticatedUser?
+    @Published var currentUser: AuthenticatedUser?
+
+    @Published var userNameError: ValidationError? = .emptyUserName
+    @Published var emailError: ValidationError? = .emptyEmail
+    @Published var passwordError: ValidationError? = .passwordTooWeak
+    @Published var confirmPasswordError: ValidationError? = .passwordsDoNotMatch
+    
+    @Published var didAttemptToProceed = false
+
     
     init() {
         print("DEBUG - AuthViewModel init")
         do {
-            self.userFirebaseSession = try AuthenticationManager.shared.getAuthenticatedUser()
+            self.currentUser = try AuthenticationManager.shared.getAuthenticatedUser()
         } catch {
-            print("Error: \(error)")
+            print("AuthViewModel init - no current user \(error)")
         }
         
         Task {
@@ -45,6 +50,61 @@ final class AuthViewModel: ObservableObject  {
         }
     }
     
+    // MARK: Validation methods
+    func validateUserName(_ userName: String) {
+        if userName.isEmpty {
+            userNameError = .emptyUserName
+        } else {
+            userNameError = .noError
+        }
+    }
+    
+    func validateEmail(_ email: String) {
+        if email.isEmpty {
+            emailError = .custom(message: "Email cannot be empty.")
+        } else if !email.contains("@") || !email.contains(".") {
+            emailError = .invalidEmail
+        } else {
+            emailError = .noError
+        }
+    }
+    
+    func validatePassword(_ password: String) {
+        if password.count < 6 {
+            passwordError = .passwordTooWeak
+        } else {
+            passwordError = .noError
+        }
+    }
+    
+    func validateConfirmPassword(_ password: String, confirmPassword: String) {
+        if confirmPassword != password {
+            confirmPasswordError = .passwordsDoNotMatch
+        } else {
+            confirmPasswordError = .noError
+        }
+    }
+    
+    var isFormValidResetPassword: Bool {
+        emailError == .noError
+    }
+    
+    var isFormValidSignIn: Bool {
+        emailError == .noError
+        && passwordError == .noError
+    }
+    
+    var isFormValidSignUp: Bool {
+        userNameError == .noError
+        && emailError == .noError
+        && passwordError == .noError
+        && confirmPasswordError == .noError
+    }
+    
+    
+    
+
+    // MARK: Authentication functions
     func signIn(email:String, password: String) async {
         guard !email.isEmpty, !password.isEmpty else {
             print("No email or password found")
@@ -53,7 +113,7 @@ final class AuthViewModel: ObservableObject  {
         
         do {
             let authenticatedUser = try await AuthenticationManager.shared.signIn(email: email, password: password)
-            self.userFirebaseSession = authenticatedUser
+            self.currentUser = authenticatedUser
             await fetchUser()
             
         } catch {
@@ -70,7 +130,7 @@ final class AuthViewModel: ObservableObject  {
         do {
             let authenticatedUser = try await AuthenticationManager.shared.createUser(email: email, password: password, username: username)
             
-            self.userFirebaseSession = authenticatedUser
+            self.currentUser = authenticatedUser
             await fetchUser()
             
         } catch {
@@ -80,16 +140,16 @@ final class AuthViewModel: ObservableObject  {
     
     func logout() throws {
         try AuthenticationManager.shared.logout()
-        self.userFirebaseSession = nil
+        self.currentUser = nil
         self.userProfile = nil
     }
     
-    func resetPassword() async throws {
-        let authUser = try AuthenticationManager.shared.getAuthenticatedUser()
-        
-        guard let email = authUser.email else {
-            throw URLError(.fileDoesNotExist)
-        }
+    func resetPassword(email: String) async throws {
+        /*let authUser = try AuthenticationManager.shared.getAuthenticatedUser()
+         
+         guard let email = authUser.email else {
+         throw URLError(.fileDoesNotExist)
+         }*/
         
         try await AuthenticationManager.shared.resetPassword(email: email)
     }
@@ -106,4 +166,38 @@ final class AuthViewModel: ObservableObject  {
     func fetchUser() async {
         self.userProfile = await AuthenticationManager.shared.fetchUser()
     }
+    
+    
 }
+
+enum ValidationError: Error, Equatable {
+    
+    var id: String { self.message }
+    case noError
+    case emptyUserName
+    case invalidEmail
+    case emptyEmail
+    case passwordTooWeak
+    case passwordsDoNotMatch
+    case custom(message: String)
+    
+    var message: String {
+        switch self {
+        case .emptyUserName:
+            return "Please enter a username."
+        case .invalidEmail:
+            return "Please enter a valid email format."
+        case .emptyEmail:
+            return "Please enter an email."
+        case .passwordTooWeak:
+            return "Password must be at least 6 characters long."
+        case .passwordsDoNotMatch:
+            return "Passwords do not match."
+        case .noError:
+            return ""
+        case .custom(let message):
+            return message
+        }
+    }
+}
+

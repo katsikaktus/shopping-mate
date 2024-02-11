@@ -11,6 +11,10 @@ struct SignInView: View {
     
     @State var email = ""
     @State var password = ""
+    @State private var isPasswordVisible = false
+    @State private var isShowingForgotPasswordSheet = false
+    @State private var showError = false
+    
     @EnvironmentObject var viewModel: AuthViewModel
     
     var body: some View {
@@ -19,9 +23,7 @@ struct SignInView: View {
                 topBackground
                 bottomBackground
                 contentScrollView
-                
             }
-            
         }
     }
 }
@@ -29,6 +31,7 @@ struct SignInView: View {
 #Preview {
     NavigationStack{
         SignInView()
+            .environmentObject(AuthViewModel())
             .preferredColorScheme(.dark)
             .previewDisplayName("Dark Mode")
     }
@@ -38,6 +41,7 @@ struct SignInView: View {
 #Preview {
     NavigationStack{
         SignInView()
+            .environmentObject(AuthViewModel())
             .preferredColorScheme(.light)
             .previewDisplayName("Light Mode")
     }
@@ -63,7 +67,7 @@ extension SignInView{
                 .fill(Color.theme.backgroundSecondaryColor)
                 .frame(height: 500)
             Spacer()
-
+            
         }
         .edgesIgnoringSafeArea(.top)
     }
@@ -98,7 +102,11 @@ extension SignInView{
         }
         .padding(.horizontal, 24)
         .background(Color.theme.backgroundMainColor)
-        // Apply background here
+        .sheet(isPresented: $isShowingForgotPasswordSheet) {
+            ForgotPasswordView(isShowingForgotPasswordSheet: $isShowingForgotPasswordSheet)
+                .presentationDetents([.medium, .large])
+        }
+        
     }
     
     private var signInTitle: some View {
@@ -107,30 +115,77 @@ extension SignInView{
     }
     
     private var emailTextField: some View {
-        TextFieldRowView(iconName: "envelope", placeholder: "Enter your email", text: $email, isSecure: false)
-            .textInputAutocapitalization(.never)
+        TextFieldRowView(
+            iconName: "envelope",
+            placeholder: "Enter your email",
+            text: $email,
+            isSecure: false,
+            showError: viewModel.didAttemptToProceed && viewModel.emailError != nil,
+            errorMessage: viewModel.emailError?.message ?? ""
+        )
+        .onChange(of: email) { _, newState in
+            viewModel.validateEmail(newState)
+        }
+        .textInputAutocapitalization(.never)
     }
     
     private var passwordTextField: some View {
-        TextFieldRowView(iconName: "lock", placeholder: "Enter your password", text: $password, isSecure: true)
+        ZStack(alignment: .trailing) {
+            TextFieldRowView(
+                iconName: "lock",
+                placeholder: "Enter your password",
+                text: $password,
+                isSecure: !isPasswordVisible,
+                showError: viewModel.didAttemptToProceed && viewModel.passwordError != nil,
+                errorMessage: viewModel.passwordError?.message ?? ""
+            )
+            .onChange(of: password) { _, newState in
+                viewModel.validatePassword(newState)
+            }
+            
+            
+            Button(action: {
+                isPasswordVisible.toggle()
+            }) {
+                Image(systemName: isPasswordVisible ? "eye.slash" : "eye")
+                    .foregroundColor(.gray)
+                    .frame(width: 30, height: 30)
+                    .padding(.trailing)
+                    .padding(.bottom)
+            }
+        }
     }
     
     private var forgotPasswordPrompt: some View {
         HStack{
             Spacer()
-            Text ("Forgot password?").font(.headline).bold().padding()
+            Button(action: {
+                isShowingForgotPasswordSheet = true
+            }) {
+                Text ("Forgot password?")
+                    .font(.headline)
+                    .padding(.horizontal)
+                    .padding(.vertical, 8)
+                    .foregroundStyle(Color.theme.onBackgroundColor)
+            }
+            
         }
     }
     
     private var signInButton: some View {
-        SignButton(
+        ButtonComponent(
             buttonText: "Sign in",
-            action: { await viewModel.signIn(email: email, password: password) },
-            iconSystemName: "arrow.right", 
-            formIsValid: formIsValid
+            action: {
+                viewModel.didAttemptToProceed = true
+                viewModel.validateEmail(email)
+                viewModel.validatePassword(password)
+                if viewModel.isFormValidSignIn {
+                    await viewModel.signIn(email: email, password: password) }
+            },
+            formIsValid: viewModel.isFormValidSignIn
         )
     }
-
+    
     private var alternativeLoginOptions: some View {
         VStack{
             HStack {
@@ -151,7 +206,7 @@ extension SignInView{
                     .foregroundColor(Color.theme.onBackgroundColor)
                     .frame(maxWidth: .infinity) // Allow the line to expand
             }
-            .frame(height: 20) // Adjust the height as needed
+            .frame(height: 12) // Adjust the height as needed
             .padding()
             
             HStack(alignment: .center){
@@ -183,14 +238,5 @@ extension SignInView{
             }
             Spacer()
         }.padding()
-    }
-}
-
-extension SignInView: AuthenticationFormProtocol {
-    var formIsValid: Bool {
-        return !email.isEmpty
-        && email.contains("@")
-        && !password.isEmpty
-        && password.count > 5
     }
 }

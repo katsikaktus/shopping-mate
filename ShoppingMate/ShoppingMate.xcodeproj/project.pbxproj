@@ -29,8 +29,9 @@
 		52A18ACF2B70042E00C912B2 /* SettingsRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A18ACE2B70042E00C912B2 /* SettingsRowView.swift */; };
 		52A18AD52B702D4000C912B2 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 52A18AD42B702D4000C912B2 /* FirebaseFirestore */; };
 		52A18AD72B702D4800C912B2 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 52A18AD62B702D4800C912B2 /* FirebaseFirestoreSwift */; };
+		52D62C3D2B793E9E008DDC50 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D62C3C2B793E9E008DDC50 /* ForgotPasswordView.swift */; };
 		52EEBF982B6FB63400531CBA /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EEBF972B6FB63400531CBA /* Color.swift */; };
-		52EEBF9C2B6FFA5200531CBA /* SignButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EEBF9B2B6FFA5200531CBA /* SignButton.swift */; };
+		52EEBF9C2B6FFA5200531CBA /* ButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EEBF9B2B6FFA5200531CBA /* ButtonComponent.swift */; };
 		52F3F68F2B6E8E10001E6405 /* Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F3F68E2B6E8E10001E6405 /* Binding.swift */; };
 		52F3F6912B6E9082001E6405 /* BindingBoolExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F3F6902B6E9082001E6405 /* BindingBoolExtensionTests.swift */; };
 /* End PBXBuildFile section */
@@ -73,8 +74,9 @@
 		5274B0172B5C57410016EBCA /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		527B420D2B5C7739000B414E /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		52A18ACE2B70042E00C912B2 /* SettingsRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRowView.swift; sourceTree = "<group>"; };
+		52D62C3C2B793E9E008DDC50 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		52EEBF972B6FB63400531CBA /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		52EEBF9B2B6FFA5200531CBA /* SignButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignButton.swift; sourceTree = "<group>"; };
+		52EEBF9B2B6FFA5200531CBA /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
 		52F3F68E2B6E8E10001E6405 /* Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Binding.swift; sourceTree = "<group>"; };
 		52F3F6902B6E9082001E6405 /* BindingBoolExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingBoolExtensionTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -114,6 +116,7 @@
 			children = (
 				5274B0132B5C46480016EBCA /* SignInView.swift */,
 				5274B0152B5C487B0016EBCA /* SignUpEmailView.swift */,
+				52D62C3C2B793E9E008DDC50 /* ForgotPasswordView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -148,7 +151,7 @@
 				5268A09C2B6EFD5C00BEFF11 /* AppLogoView.swift */,
 				523010172B66ECF400BB0F9A /* TextFieldRowView.swift */,
 				52A18ACE2B70042E00C912B2 /* SettingsRowView.swift */,
-				52EEBF9B2B6FFA5200531CBA /* SignButton.swift */,
+				52EEBF9B2B6FFA5200531CBA /* ButtonComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -436,7 +439,8 @@
 				5274B0162B5C487B0016EBCA /* SignUpEmailView.swift in Sources */,
 				527B420E2B5C7739000B414E /* RootView.swift in Sources */,
 				5268A0942B6EF57E00BEFF11 /* ProfileView.swift in Sources */,
-				52EEBF9C2B6FFA5200531CBA /* SignButton.swift in Sources */,
+				52EEBF9C2B6FFA5200531CBA /* ButtonComponent.swift in Sources */,
+				52D62C3D2B793E9E008DDC50 /* ForgotPasswordView.swift in Sources */,
 				52F3F68F2B6E8E10001E6405 /* Binding.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
