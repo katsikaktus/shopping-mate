@@ -13,9 +13,7 @@ struct SignUpEmailView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var confirmPassword = ""
-    @State private var showError = false
     @State private var isPasswordVisible = false
-    @State private var errorMessage = ""
     
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject private var viewModel: AuthViewModel
@@ -30,32 +28,17 @@ struct SignUpEmailView: View {
                 userNameTextField
                 emailTextField
                 passwordTextField
-                
-                ZStack(alignment: .trailing) {
-                    confirmPasswordTextField
-                    if !password.isEmpty && !confirmPassword.isEmpty {
-                        if password == confirmPassword {
-                            Image(systemName: "checkmark.circle.fill")
-                                .imageScale(.large)
-                                .fontWeight(.bold)
-                                .foregroundStyle(Color(.systemGreen))
-                                .padding()
-                        } else {
-                            Image(systemName: "xmark.circle.fill")
-                                .imageScale(.large)
-                                .fontWeight(.bold)
-                                .foregroundStyle(Color(.systemGray))
-                                .padding()
-                        }
-                    }
-                }
+                confirmPasswordTextField
                 
                 Spacer(minLength: 40)
                 signUpButton
-                Spacer(minLength: 80)
+                Spacer(minLength: 56)
                 signInPrompt
             }
             .padding(.horizontal, 24)
+        }
+        .onAppear {
+            viewModel.didAttemptToSignUp = false
         }
         
     }
@@ -79,8 +62,11 @@ extension SignUpEmailView{
             placeholder: "Create your username",
             text: $userName,
             isSecure: false,
-            showError: viewModel.userNameError != nil,
-            errorMessage: viewModel.userNameError?.message ?? "")
+            showError: viewModel.didAttemptToSignUp && viewModel.userNameError != FormValidationError.noError,
+            errorMessage: viewModel.userNameError?.message)
+        .onChange(of: userName) { _, newState in
+            viewModel.validateUserName(newState)
+        }
     }
     
     private var emailTextField: some View {
@@ -89,9 +75,12 @@ extension SignUpEmailView{
             placeholder: "Enter your email",
             text: $email,
             isSecure: false,
-            showError: viewModel.emailError != nil,
-            errorMessage: viewModel.emailError?.message ?? "")
+            showError: viewModel.didAttemptToSignUp && viewModel.emailError != FormValidationError.noError,
+            errorMessage: viewModel.emailError?.message)
         .textInputAutocapitalization(.never)
+        .onChange(of: email) { _, newState in
+            viewModel.validateEmail(newState)
+        }
     }
     
     private var passwordTextField: some View {
@@ -101,8 +90,12 @@ extension SignUpEmailView{
                 placeholder: "Create your password",
                 text: $password,
                 isSecure: !isPasswordVisible,
-                showError: viewModel.passwordError != nil,
-                errorMessage: viewModel.passwordError?.message ?? "")
+                showError: viewModel.didAttemptToSignUp && viewModel.passwordError != FormValidationError.noError,
+                errorMessage: viewModel.passwordError?.message)
+            .onChange(of: password) { _, newState in
+                viewModel.validatePassword(newState)
+                viewModel.validateConfirmPassword(newState, confirmPassword: confirmPassword)
+            }
             
             Button(action: {
                 isPasswordVisible.toggle()
@@ -124,8 +117,12 @@ extension SignUpEmailView{
                 placeholder: "Confirm your password",
                 text: $confirmPassword,
                 isSecure: !isPasswordVisible,
-                showError: viewModel.confirmPasswordError != nil,
-                errorMessage: viewModel.confirmPasswordError?.message ?? "")
+                showError: viewModel.didAttemptToSignUp && viewModel.confirmPasswordError != FormValidationError.noError,
+                errorMessage: viewModel.confirmPasswordError?.message)
+            .onChange(of: confirmPassword) { _, newState in
+                
+                viewModel.validateConfirmPassword(password, confirmPassword: newState)
+            }
             
             Button(action: {
                 isPasswordVisible.toggle()
@@ -143,6 +140,9 @@ extension SignUpEmailView{
         ButtonComponent(
             buttonText: "Sign up",
             action: {
+                
+                viewModel.didAttemptToSignUp = true
+
                 viewModel.validateUserName(userName)
                 viewModel.validateEmail(email)
                 viewModel.validatePassword(password)
@@ -150,6 +150,8 @@ extension SignUpEmailView{
                 
                 if viewModel.isFormValidSignUp {
                     await viewModel.signUp(email: email, password: password, username: userName)
+                } else {
+                    
                 }
             },
             formIsValid: viewModel.isFormValidSignUp

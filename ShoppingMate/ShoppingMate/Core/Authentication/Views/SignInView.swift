@@ -9,11 +9,10 @@ import SwiftUI
 
 struct SignInView: View {
     
-    @State var email = ""
-    @State var password = ""
+    @State private var email = ""
+    @State private var password = ""
     @State private var isPasswordVisible = false
     @State private var isShowingForgotPasswordSheet = false
-    @State private var showError = false
     
     @EnvironmentObject var viewModel: AuthViewModel
     
@@ -24,7 +23,11 @@ struct SignInView: View {
                 bottomBackground
                 contentScrollView
             }
+            .onAppear {
+                viewModel.didAttemptToSignIn = false
+            }
         }
+        
     }
 }
 
@@ -103,7 +106,7 @@ extension SignInView{
         .padding(.horizontal, 24)
         .background(Color.theme.backgroundMainColor)
         .sheet(isPresented: $isShowingForgotPasswordSheet) {
-            ForgotPasswordView(isShowingForgotPasswordSheet: $isShowingForgotPasswordSheet)
+            ForgotPasswordView(email: $email, isShowingForgotPasswordSheet: $isShowingForgotPasswordSheet)
                 .presentationDetents([.medium, .large])
         }
         
@@ -120,8 +123,8 @@ extension SignInView{
             placeholder: "Enter your email",
             text: $email,
             isSecure: false,
-            showError: viewModel.didAttemptToProceed && viewModel.emailError != nil,
-            errorMessage: viewModel.emailError?.message ?? ""
+            showError: viewModel.didAttemptToSignIn && viewModel.emailError != FormValidationError.noError,
+            errorMessage: viewModel.emailError?.message
         )
         .onChange(of: email) { _, newState in
             viewModel.validateEmail(newState)
@@ -136,8 +139,8 @@ extension SignInView{
                 placeholder: "Enter your password",
                 text: $password,
                 isSecure: !isPasswordVisible,
-                showError: viewModel.didAttemptToProceed && viewModel.passwordError != nil,
-                errorMessage: viewModel.passwordError?.message ?? ""
+                showError: viewModel.didAttemptToSignIn && viewModel.passwordError != FormValidationError.noError,
+                errorMessage: viewModel.passwordError?.message
             )
             .onChange(of: password) { _, newState in
                 viewModel.validatePassword(newState)
@@ -176,7 +179,7 @@ extension SignInView{
         ButtonComponent(
             buttonText: "Sign in",
             action: {
-                viewModel.didAttemptToProceed = true
+                viewModel.didAttemptToSignIn = true
                 viewModel.validateEmail(email)
                 viewModel.validatePassword(password)
                 if viewModel.isFormValidSignIn {

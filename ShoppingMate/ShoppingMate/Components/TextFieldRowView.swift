@@ -36,11 +36,10 @@ struct TextFieldRowView: View {
                 .stroke(!showError ? Color.gray : Color.theme.errorColor, lineWidth: 0.5))
             .clipShape(RoundedRectangle(cornerRadius: 20))
             .shadow(radius: 1)
-            .frame(minHeight: 50, maxHeight: 50)
             
             HStack {
                 Spacer()
-                Text(errorMessage ?? " ")
+                Text(errorMessage ?? "")
                     .font(.caption)
                     .foregroundColor(Color.theme.errorColor)
                     .padding(.horizontal)

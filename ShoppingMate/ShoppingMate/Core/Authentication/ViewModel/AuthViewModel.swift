@@ -29,12 +29,16 @@ final class AuthViewModel: ObservableObject  {
     @Published var userProfile: UserProfile?
     @Published var currentUser: AuthenticatedUser?
 
-    @Published var userNameError: ValidationError? = .emptyUserName
-    @Published var emailError: ValidationError? = .emptyEmail
-    @Published var passwordError: ValidationError? = .passwordTooWeak
-    @Published var confirmPasswordError: ValidationError? = .passwordsDoNotMatch
+    @Published var userNameError: FormValidationError? = .emptyUserName
+    @Published var emailError: FormValidationError? = .invalidEmail
+    @Published var passwordError: FormValidationError? = .passwordTooWeak
+    @Published var confirmPasswordError: FormValidationError? = .passwordsDoNotMatch
     
-    @Published var didAttemptToProceed = false
+    @Published var didAttemptToSignIn = false
+    @Published var didAttemptToSignUp = false
+    @Published var didAttemptToResetPassword = false
+
+
 
     
     init() {
@@ -60,9 +64,17 @@ final class AuthViewModel: ObservableObject  {
     }
     
     func validateEmail(_ email: String) {
+        // Define a character set containing all valid characters for an email address
+        let allowedCharacterSet = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@.-_")
+        
+        // Check if the email contains only allowed characters
+        let emailCharacterSet = CharacterSet(charactersIn: email)
         if email.isEmpty {
-            emailError = .custom(message: "Email cannot be empty.")
+            emailError = .invalidEmail
         } else if !email.contains("@") || !email.contains(".") {
+            emailError = .invalidEmail
+        } else if !emailCharacterSet.isSubset(of: allowedCharacterSet) {
+            // If the email contains characters not found in the allowed character set, it's invalid
             emailError = .invalidEmail
         } else {
             emailError = .noError
@@ -170,13 +182,12 @@ final class AuthViewModel: ObservableObject  {
     
 }
 
-enum ValidationError: Error, Equatable {
+enum FormValidationError: Error, Equatable {
     
     var id: String { self.message }
     case noError
     case emptyUserName
     case invalidEmail
-    case emptyEmail
     case passwordTooWeak
     case passwordsDoNotMatch
     case custom(message: String)
@@ -184,17 +195,15 @@ enum ValidationError: Error, Equatable {
     var message: String {
         switch self {
         case .emptyUserName:
-            return "Please enter a username."
+            return "*Please enter a username."
         case .invalidEmail:
-            return "Please enter a valid email format."
-        case .emptyEmail:
-            return "Please enter an email."
+            return "*Please enter a valid email format."
         case .passwordTooWeak:
-            return "Password must be at least 6 characters long."
+            return "*Password must be at least 6 characters long."
         case .passwordsDoNotMatch:
-            return "Passwords do not match."
+            return "*Passwords do not match."
         case .noError:
-            return ""
+            return "No error"
         case .custom(let message):
             return message
         }
